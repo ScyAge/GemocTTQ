@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-18">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="libs/annotations-13.0.jar"/>
+	<classpathentry kind="lib" path="libs/javalin-6.6.0.jar"/>
+	<classpathentry kind="lib" path="libs/jetty-http-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/jetty-io-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/jetty-jakarta-servlet-api-5.0.2.jar"/>
+	<classpathentry kind="lib" path="libs/jetty-security-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/jetty-server-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/jetty-servlet-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/jetty-util-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/jetty-webapp-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/jetty-xml-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/kotlin-stdlib-1.9.25.jar"/>
+	<classpathentry kind="lib" path="libs/kotlin-stdlib-jdk7-1.9.25.jar"/>
+	<classpathentry kind="lib" path="libs/kotlin-stdlib-jdk8-1.9.25.jar"/>
+	<classpathentry kind="lib" path="libs/slf4j-api-2.0.17.jar"/>
+	<classpathentry kind="lib" path="libs/slf4j-simple-2.0.16.jar"/>
+	<classpathentry kind="lib" path="libs/websocket-core-common-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/websocket-core-server-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/websocket-jetty-api-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/websocket-jetty-common-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/websocket-jetty-server-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/websocket-servlet-11.0.25.jar"/>
+	<classpathentry kind="lib" path="libs/error_prone_annotations-2.38.0.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.13.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
