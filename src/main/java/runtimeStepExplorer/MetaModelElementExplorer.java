@@ -22,6 +22,9 @@ public class MetaModelElementExplorer {
 	}
 	
 	public Optional<MetamodelElementWrapper> getWrapper(Object var) {
+		if(var == null) {
+			return Optional.empty();
+		}
 		Iterator<MetamodelElementWrapper> s = setElement.iterator();
 		Optional<MetamodelElementWrapper> found = Optional.empty();
 		while(s.hasNext() && !found.isPresent()) {
@@ -29,18 +32,11 @@ public class MetaModelElementExplorer {
 		}
 		if(found.isPresent()) {
 			MetamodelElementWrapper test = found.get();
-			try {
-				List<Object> test2 = this.getSubModelElement(var);
-				if(!test2.isEmpty()) {
-					List<MetamodelElementWrapper> res = this.getWrappers(test2);
-					test.addAllAttribute(res);
-					return Optional.of(test);
-				}
-				return Optional.empty();
-				
-			} catch (IllegalAccessException | InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			List<Object> test2 = this.getSubModelElement(var);
+			if(!test2.isEmpty()) {
+				List<MetamodelElementWrapper> res = this.getWrappers(test2);
+				test.addAllAttribute(res);
+				return Optional.of(test);
 			}
 		}
 		return Optional.empty();
@@ -54,8 +50,8 @@ public class MetaModelElementExplorer {
 		return test;
 	}
 	
-	public List<Object> getSubModelElement(Object var) throws IllegalAccessException, InvocationTargetException{
-		Class<? extends EObject> classT = var.getClass();
+	public List<Object> getSubModelElement(Object var){
+		Class<?> classT = var.getClass();
 		Method[] tabMethod = classT.getDeclaredMethods();
 		List<Object> res = new ArrayList<>();
         for (Method f : tabMethod) {

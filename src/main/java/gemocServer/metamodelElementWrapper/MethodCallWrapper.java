@@ -50,7 +50,7 @@ public class MethodCallWrapper extends MetamodelElementWrapper{
 		return visitor.visit(this);
 	}
 	
-	public  Optional<MetamodelElementWrapper> test(EObject car) {
+	public  Optional<MetamodelElementWrapper> test(Object car) {
 		if(car instanceof MethodCallImpl) {
 			return Optional.of(new MethodCallWrapper((MethodCallImpl) car)) ;
 		}
