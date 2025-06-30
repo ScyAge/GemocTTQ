@@ -13,15 +13,15 @@ import org.eclipse.gemoc.trace.simple.RuntimeStep;
 import org.tetrabox.minijava.model.miniJava.MethodCall;
 import org.tetrabox.minijava.model.miniJava.impl.MethodCallImpl;
 
-import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
+import main.java.gemocServer.metamodelElementWrapper.MetamodelElementAdapter;
 import main.java.gemocServer.metamodelElementWrapper.MethodCallWrapper;
 
 public class RuntimeStepExplorer {
 	
-	private final List<MetamodelElementWrapper> list = new ArrayList<>(); 
+	private final List<MetamodelElementAdapter> list = new ArrayList<>(); 
 	private final MetaModelElementExplorer explorer;
 	
-	public RuntimeStepExplorer(Set<MetamodelElementWrapper> element) {
+	public RuntimeStepExplorer(Set<MetamodelElementAdapter> element) {
 		explorer = new MetaModelElementExplorer(element);
 	}
 	
@@ -41,7 +41,7 @@ public class RuntimeStepExplorer {
 	
 	
 	
-	public List<MetamodelElementWrapper> getList(){
+	public List<MetamodelElementAdapter> getList(){
 		return list;
 	}
 	

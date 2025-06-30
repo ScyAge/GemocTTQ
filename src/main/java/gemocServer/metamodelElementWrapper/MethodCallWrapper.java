@@ -13,7 +13,7 @@ import org.tetrabox.minijava.model.miniJava.impl.VariableDeclarationImpl;
 
 import main.java.gemocServer.runtimeStepReader.MetamodelElementWrapperReaderVisitor;
 
-public class MethodCallWrapper extends MetamodelElementWrapper{
+public class MethodCallWrapper{
 
 	private MethodCallImpl wrappedMethodCall;
 	private String test;
@@ -44,20 +44,20 @@ public class MethodCallWrapper extends MetamodelElementWrapper{
 		return (MethodImpl) this.wrappedMethodCall.getMethod();
 	}
 
-
+	/**
 	@Override
 	public String accept(MetamodelElementWrapperReaderVisitor visitor) {
 		return visitor.visit(this);
 	}
 	
-	public  Optional<MetamodelElementWrapper> test(Object car) {
+	public  Optional<MetamodelElementAdapter> test(Object car) {
 		if(car instanceof MethodCallImpl) {
 			return Optional.of(new MethodCallWrapper((MethodCallImpl) car)) ;
 		}
 		
 		return Optional.empty();
 	}
-	
+	**/
 	public String toString() {
 		return String.format("nameMethod: %s",this.getMethodName());
 		

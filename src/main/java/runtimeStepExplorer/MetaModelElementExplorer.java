@@ -3,30 +3,32 @@ package main.java.runtimeStepExplorer;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
+import main.java.gemocServer.metamodelElementWrapper.MetamodelElementAdapter;
 
 public class MetaModelElementExplorer {
 	
-	private Set<MetamodelElementWrapper> setElement;
+	private Set<MetamodelElementAdapter> setElement;
 	
 	
-	public MetaModelElementExplorer(Set<MetamodelElementWrapper> element) {
+	public MetaModelElementExplorer(Set<MetamodelElementAdapter> element) {
 		setElement = element;
 	}
 	
-	public Optional<MetamodelElementWrapper> getWrapper(Object var) {
+	public Optional<MetamodelElementAdapter> getWrapper(Object var) {
 		if(var == null) {
 			return Optional.empty();
 		}
-		Iterator<MetamodelElementWrapper> s = setElement.iterator();
-		Optional<MetamodelElementWrapper> found = Optional.empty();
+		Iterator<MetamodelElementAdapter> s = setElement.iterator();
+		Optional<MetamodelElementAdapter> found = Optional.empty();
 		while(s.hasNext() && !found.isPresent()) {
-			found = s.next().test(var);
+			found = s.next().createAdapterIfInstanceOf(var);
 		}
 		if(found.isPresent()) {
 			return this.getSubWrapper(var, found.get());
@@ -36,21 +38,27 @@ public class MetaModelElementExplorer {
 		
 	}
 
-	private Optional<MetamodelElementWrapper> getSubWrapper(Object var, MetamodelElementWrapper wrapper) {
+	private Optional<MetamodelElementAdapter> getSubWrapper(Object var, MetamodelElementAdapter wrapper) {
 		List<Object> test2 = this.getSubModelElement(var);
 		if(!test2.isEmpty()) {
-			List<MetamodelElementWrapper> res = this.getWrappers(test2);
+			Map<Class<? extends Object>, MetamodelElementAdapter> res = this.getWrappers(test2);
 			wrapper.addAllAttribute(res);
 			return Optional.of(wrapper);
 		}
 		return Optional.empty();
 	}
 	
-	public List<MetamodelElementWrapper> getWrappers(List<Object> var) {
-		
-		List<MetamodelElementWrapper> test = var.stream().map(el -> this.getWrapper(el)).filter(el -> el.isPresent()).map(el -> el.get()).toList();
-		return test;
+	public Map<Class<? extends Object>, MetamodelElementAdapter> getWrappers(List<Object> listSubAttribute) {
+		Map<Class<? extends Object>, MetamodelElementAdapter> res = new HashMap<>();
+		for(Object attr : listSubAttribute) {
+			Optional<MetamodelElementAdapter> adapter = this.getWrapper(attr);
+			if(adapter.isPresent()) {
+				res.put(attr.getClass(), adapter.get());
+			}
+		}
+		return res;
 	}
+	
 	
 	public List<Object> getSubModelElement(Object var){
 		Class<?> classT = var.getClass();

@@ -2,13 +2,13 @@
 package main.java.gemocServer.runtimeStepReader;
 
 
-import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
+import main.java.gemocServer.metamodelElementWrapper.MetamodelElementAdapter;
 import main.java.gemocServer.metamodelElementWrapper.MethodCallWrapper;
 
 public class MetamodelElementWrapperReaderVisitor {
 	
 	
-	public String visit(MetamodelElementWrapper objectToVisit) {
+	public String visit(MetamodelElementAdapter objectToVisit) {
 		return objectToVisit.accept(this);
 	}
 	
