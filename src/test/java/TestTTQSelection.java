@@ -36,7 +36,6 @@ public class TestTTQSelection {
 		RuntimeStepExplorer exp = new RuntimeStepExplorer(car);
 		exp.explore(methodCallStep);
 		List<MetamodelElementWrapper> res = exp.getList();
-		List<RuntimeStep> les = exp.n;
 		
 	}
 	

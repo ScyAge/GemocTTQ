@@ -19,20 +19,16 @@ import main.java.gemocServer.metamodelElementWrapper.MethodCallWrapper;
 public class RuntimeStepExplorer {
 	
 	private final List<MetamodelElementWrapper> list = new ArrayList<>(); 
-	private final Set<MetamodelElementWrapper> setElement; 
 	private final MetaModelElementExplorer explorer;
-	public final List<RuntimeStep> n = new ArrayList();
 	
 	public RuntimeStepExplorer(Set<MetamodelElementWrapper> element) {
-		setElement = element;
 		explorer = new MetaModelElementExplorer(element);
 	}
 	
 	public void explore(RuntimeStep aStep) {
 		
 		this.explorer.getWrapper(aStep.getSemanticRuleStaticTarget()).ifPresent(list::add);;
-		this.n.add(aStep);
-		if(aStep.getSubSteps() != null && !aStep.getSubSteps().isEmpty()) {
+		if(aStep.getSubSteps() != null) {
 			this.explore(aStep.getSubSteps());
 		}
 		
