@@ -24,6 +24,9 @@ public final class TTQTestResources {
 			Resource r = TTQTestResources.miniJavaTraceResource();
 			EcoreUtil.resolveAll(r.getResourceSet());
 			trace = (SimpleTrace) r.getContents().get(0);
+			//trace.eAllContents() chaque object de la trace
+			
+			
 		}
 		return trace;
 	}

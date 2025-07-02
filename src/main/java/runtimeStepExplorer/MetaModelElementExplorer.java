@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
+
 import main.java.gemocServer.metamodelElementWrapper.MetamodelElementAdapter;
 
 public class MetaModelElementExplorer {
@@ -60,7 +62,10 @@ public class MetaModelElementExplorer {
 	}
 	
 	
-	public List<Object> getSubModelElement(Object var){
+	public List<Object> getSubModelElement(EObject var){
+		//var.eClass().getEAllStructuralFeatures();
+		//var.eGet();
+		//
 		Class<?> classT = var.getClass();
 		Method[] tabMethod = classT.getDeclaredMethods();
 		List<Object> res = new ArrayList<>();

@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gemoc.trace.simple.RuntimeStep;
 import org.eclipse.gemoc.trace.simple.SimpleTrace;
 import org.junit.jupiter.api.Assertions;
@@ -28,6 +30,8 @@ public class TestTTQSelection {
 	
 		RuntimeStep methodCallStep = TTQTestResources.miniJavaMethodCallStepExample();
 		EList<RuntimeStep> test = TTQTestResources.miniJavaRootStepsExample();
+		SimpleTrace trace = TTQTestResources.miniJavaTraceExample();
+		TreeIterator<EObject> e = trace.eAllContents();
 		//Assertions.assertTrue(TTQSelectionFunctions.isKindOf(methodCallClass, methodCallStep));
 		Set<MetamodelElementAdapter> car = this.test();
 		RuntimeStepExplorer exp = new RuntimeStepExplorer(car);
