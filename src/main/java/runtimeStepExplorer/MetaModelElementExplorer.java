@@ -62,7 +62,7 @@ public class MetaModelElementExplorer {
 	}
 	
 	
-	public List<Object> getSubModelElement(EObject var){
+	public List<Object> getSubModelElement(Object var){
 		//var.eClass().getEAllStructuralFeatures();
 		//var.eGet();
 		//

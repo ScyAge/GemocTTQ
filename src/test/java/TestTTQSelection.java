@@ -33,10 +33,10 @@ public class TestTTQSelection {
 		SimpleTrace trace = TTQTestResources.miniJavaTraceExample();
 		TreeIterator<EObject> e = trace.eAllContents();
 		//Assertions.assertTrue(TTQSelectionFunctions.isKindOf(methodCallClass, methodCallStep));
-		Set<MetamodelElementAdapter> car = this.test();
-		RuntimeStepExplorer exp = new RuntimeStepExplorer(car);
-		exp.explore(methodCallStep);
-		List<MetamodelElementAdapter> res = exp.getList();
+		//Set<MetamodelElementAdapter> car = this.test();
+		//RuntimeStepExplorer exp = new RuntimeStepExplorer(car);
+		//exp.explore(methodCallStep);
+		//List<MetamodelElementAdapter> res = exp.getList();
 		
 	}
 	
