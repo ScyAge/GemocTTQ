@@ -9,8 +9,14 @@ import org.tetrabox.minijava.model.miniJava.semantics.impl.StateImpl;
 
 public class MetamodelElementWrapper {
 	
-	private RuntimeStepImpl runtimeStep;
-
+	protected RuntimeStepImpl runtimeStep;
+	
+	
+	/**
+	 * This method crosses the hierarchy of a RuntimeStateImpl object to be able to retrieve the RootFrame.
+	 * @param runtimeState
+	 * @return a FrameImpl representing the rootFrame
+	 */
 	private FrameImpl getRootFrameOfARuntimeState(RuntimeStateImpl runtimeState) {
 		if(runtimeState == null) {
 			return null;
@@ -24,6 +30,12 @@ public class MetamodelElementWrapper {
 		return (FrameImpl) second.getRootFrame();
 	}
 	
+	
+	/**
+	 * using the getRootFrameOfARuntimeState method, this method returns the ChildFrame from a rootStep
+	 * @param runtimeState
+	 * @return a FrameImpl representing the childFrame
+	 */
 	protected FrameImpl getChildFrameFromRootFrame(RuntimeStateImpl runtimeState) {
 		FrameImpl res = this.getRootFrameOfARuntimeState(runtimeState);
 		if(res == null) {
@@ -32,6 +44,11 @@ public class MetamodelElementWrapper {
 		return (FrameImpl) res.getChildFrame();
 	}
 	
+	/**
+	 * using the getRootFrameOfARuntimeState method, this method returns the rootContext from a rootStep
+	 * @param runtimeState
+	 * @return a ContextImpl representing the rootContext
+	 */
 	protected ContextImpl getRootContextFromRootFrame(RuntimeStateImpl runtimeState) {
 		FrameImpl res = this.getRootFrameOfARuntimeState(runtimeState);
 		if(res == null) {
