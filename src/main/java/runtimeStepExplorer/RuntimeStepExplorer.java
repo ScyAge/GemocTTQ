@@ -8,15 +8,9 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gemoc.trace.simple.RuntimeStep;
 import org.eclipse.gemoc.trace.simple.impl.RuntimeStepImpl;
-import org.tetrabox.minijava.model.miniJava.MethodCall;
-import org.tetrabox.minijava.model.miniJava.impl.MethodCallImpl;
-
-import main.java.gemocServer.metamodelElementWrapper.MetamodelElementAdapter;
 import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
-import main.java.gemocServer.metamodelElementWrapper.MethodCallWrapper;
 
 public class RuntimeStepExplorer {
 	

@@ -20,7 +20,6 @@ import org.tetrabox.minijava.model.miniJava.Expression;
 import org.tetrabox.minijava.model.miniJava.MiniJavaPackage;
 
 import main.java.TTQSelectionFunctions;
-import main.java.gemocServer.metamodelElementWrapper.MetamodelElementAdapter;
 import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
 import main.java.gemocServer.metamodelElementWrapper.MethodCallWrapper;
 import main.java.runtimeStepExplorer.MetaModelElementExplorer;
@@ -46,9 +45,9 @@ public class TestTTQSelection {
 		RuntimeStepExplorer exp = new RuntimeStepExplorer();
 		exp.explore(methodCallStep);
 		List<MetamodelElementWrapper> res = exp.getList();
-		List<Expression> asen = res.stream().map(s -> {
+		List<String> asen = res.stream().map(s -> {
 			MethodCallWrapper co = (MethodCallWrapper) res.get(0);
-			Expression n = co.getReceiver();
+			String n = co.getReceiver();
 			return n;
 		}).toList();
 		
