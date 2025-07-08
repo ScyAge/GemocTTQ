@@ -1,18 +1,10 @@
 package main.java.gemocServer.metamodelElementWrapper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gemoc.trace.simple.impl.RuntimeStateImpl;
 import org.tetrabox.minijava.model.miniJava.Expression;
 import org.tetrabox.minijava.model.miniJava.impl.MethodCallImpl;
 import org.tetrabox.minijava.model.miniJava.impl.MethodImpl;
-import org.tetrabox.minijava.model.miniJava.impl.SymbolRefImpl;
-import org.tetrabox.minijava.model.miniJava.impl.ThisImpl;
-import org.tetrabox.minijava.model.miniJava.impl.VariableDeclarationImpl;
-import org.tetrabox.minijava.model.miniJava.semantics.impl.MethodCall2Impl;
+
 
 import main.java.gemocServer.metamodelElementWrapper.receiver.AbstractReceiverWrapper;
 import main.java.gemocServer.metamodelElementWrapper.receiver.ThisReceiverWrapper;
@@ -71,7 +63,12 @@ public class MethodCallWrapper extends MetamodelElementWrapper{
 	}
 	
 	public String getReceiverName() {
-		return this.getWrappedReceiver().getReceiverName();
+		AbstractReceiverWrapper wrapper = this.getWrappedReceiver();
+		if(wrapper != null) {
+			return this.getWrappedReceiver().getReceiverName();
+		}
+		return "";
+		
 	}
 	
 	

@@ -6,7 +6,7 @@ import org.tetrabox.minijava.model.miniJava.impl.MethodCallImpl;
 
 
 import main.java.gemocServer.metamodelElementWrapper.MethodCallWrapper;
-import main.java.gemocServer.runtimeStepReader.MetamodelElementWrapperReaderVisitor;
+import main.java.gemocServer.wrapperVisitor.MetamodelElementWrapperVisitor;
 import test.java.TTQTestResources;
 import io.javalin.http.Context;
 
@@ -20,7 +20,7 @@ public class TestRuntimeRoute extends AbstractRoute {
 	@Override
 	public void result(Context context) {
 		 
-		MetamodelElementWrapperReaderVisitor test = new MetamodelElementWrapperReaderVisitor();
+		MetamodelElementWrapperVisitor test = new MetamodelElementWrapperVisitor();
 		
 		RuntimeStep methodCallStep = TTQTestResources.miniJavaMethodCallStepExample();
 		

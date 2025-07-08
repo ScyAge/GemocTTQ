@@ -7,6 +7,8 @@ import org.tetrabox.minijava.model.miniJava.semantics.impl.ContextImpl;
 import org.tetrabox.minijava.model.miniJava.semantics.impl.FrameImpl;
 import org.tetrabox.minijava.model.miniJava.semantics.impl.StateImpl;
 
+import main.java.gemocServer.wrapperVisitor.MetamodelElementWrapperVisitor;
+
 public class MetamodelElementWrapper {
 	
 	protected RuntimeStepImpl runtimeStep;
@@ -60,5 +62,13 @@ public class MetamodelElementWrapper {
 	public void setRuntimeStep(RuntimeStepImpl runtimeStep) {
 		this.runtimeStep = runtimeStep;
 	}
+
+
+	public String accept(MetamodelElementWrapperVisitor visitor) {
+		// TODO Auto-generated method stub
+		return visitor.visit(this);
+	}
+	
+	
 
 }
