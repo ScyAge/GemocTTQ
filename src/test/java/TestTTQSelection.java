@@ -1,28 +1,19 @@
 package test.java;
 
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gemoc.trace.simple.RuntimeStep;
 import org.eclipse.gemoc.trace.simple.SimpleTrace;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.tetrabox.minijava.model.miniJava.Expression;
 import org.tetrabox.minijava.model.miniJava.MiniJavaPackage;
 
 import main.java.TTQSelectionFunctions;
 import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
-import main.java.gemocServer.metamodelElementWrapper.MethodCallWrapper;
-import main.java.runtimeStepExplorer.MetaModelElementExplorer;
+import main.java.gemocServer.wrapperVisitor.MetamodelElementWrapperVisitor;
 import main.java.runtimeStepExplorer.RuntimeStepExplorer;
 
 public class TestTTQSelection {
@@ -43,14 +34,11 @@ public class TestTTQSelection {
 		
 		//Assertions.assertTrue(TTQSelectionFunctions.isKindOf(methodCallClass, methodCallStep));
 		RuntimeStepExplorer exp = new RuntimeStepExplorer();
-		exp.explore(methodCallStep);
+		MetamodelElementWrapperVisitor visitor = new MetamodelElementWrapperVisitor();
+		exp.explore(test);
 		List<MetamodelElementWrapper> res = exp.getList();
-		List<String> asen = res.stream().map(s -> {
-			MethodCallWrapper co = (MethodCallWrapper) res.get(0);
-			String n = co.getReceiver();
-			return n;
-		}).toList();
-		
+		List<String> asen = res.stream().map(s -> visitor.visit(s)).toList();
+		System.out.print("sean");
 		
 	}
 	

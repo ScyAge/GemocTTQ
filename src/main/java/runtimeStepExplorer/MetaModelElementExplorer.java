@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import main.java.gemocServer.metamodelElementWrapper.MetamodelElementAdapter;
 import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
 
 public class MetaModelElementExplorer {

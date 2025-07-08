@@ -1,5 +1,6 @@
 package main.java.gemocServer.wrapperVisitor;
 
+import main.java.gemocServer.metamodelElementWrapper.AssignmentWrapper;
 import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
 import main.java.gemocServer.metamodelElementWrapper.MethodCallWrapper;
 
@@ -15,8 +16,17 @@ public class MetamodelElementWrapperVisitor {
 	
 	public String visit(MethodCallWrapper methodCall) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(String.format("{ \"receiver\" : \"%s\" ",methodCall.getReceiverName()));
-		builder.append(String.format(" \"method\" : \"%s\" }",methodCall.getMethodName()));
+		builder.append(String.format("{ \"receiver\" : \"%s\", ",methodCall.getReceiverName()));
+		builder.append(String.format(" \"method\" : \"%s\" } ",methodCall.getMethodName()));
+		return builder.toString();
+	}
+	
+	public String visit(AssignmentWrapper assignment) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(String.format("{ \"assigneeName\" : \"%s\", ",assignment.getAssignee().getName()));
+		builder.append(String.format(" \"assigneeType\" : \"%s\"} ",assignment.getAssignee().getTypeRef().getClass().getSimpleName()));
+		//builder.append(String.format(" \"value\" : \"%s\", ",assignment.get));
+		//builder.append(String.format(" \"valueType\" : \"%d\" }",methodCall.getRuntimeStep().getNumber()));
 		return builder.toString();
 	}
 

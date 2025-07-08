@@ -1,5 +1,6 @@
 package main.java.gemocServer.metamodelElementWrapper;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.gemoc.trace.simple.impl.RuntimeStateImpl;
 import org.tetrabox.minijava.model.miniJava.Expression;
 import org.tetrabox.minijava.model.miniJava.impl.MethodCallImpl;
@@ -9,6 +10,7 @@ import org.tetrabox.minijava.model.miniJava.impl.MethodImpl;
 import main.java.gemocServer.metamodelElementWrapper.receiver.AbstractReceiverWrapper;
 import main.java.gemocServer.metamodelElementWrapper.receiver.ThisReceiverWrapper;
 import main.java.gemocServer.metamodelElementWrapper.receiver.VarReceiverWrapper;
+import main.java.gemocServer.wrapperVisitor.MetamodelElementWrapperVisitor;
 
 
 public class MethodCallWrapper extends MetamodelElementWrapper{
@@ -44,6 +46,10 @@ public class MethodCallWrapper extends MetamodelElementWrapper{
 		return (MethodImpl) this.wrappedMethodCall.getMethod();
 	}
 	
+	public EList<Expression> getArgs(){
+		return this.wrappedMethodCall.getArgs();
+	}
+	
 	public void setRuntimeStep(RuntimeStateImpl state) {
 		this.runtimeState = state;
 	}
@@ -70,7 +76,10 @@ public class MethodCallWrapper extends MetamodelElementWrapper{
 		return "";
 		
 	}
-	
+	@Override
+	public String accept(MetamodelElementWrapperVisitor visitor) {
+		// TODO Auto-generated method stub
+		return visitor.visit(this);	}
 	
 	
 }

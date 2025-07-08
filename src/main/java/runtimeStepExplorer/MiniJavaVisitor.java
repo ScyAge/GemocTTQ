@@ -21,6 +21,7 @@ public class MiniJavaVisitor extends MiniJavaSwitch<MetamodelElementWrapper>{
 	
 	public MetamodelElementWrapper caseAssignment(Assignment object) {
 		AssignmentImpl assignment = (AssignmentImpl) object;
-		return new AssignmentWrapper(assignment);
+		//return new AssignmentWrapper(assignment);
+		return null;
 	}
 }

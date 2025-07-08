@@ -1,5 +1,6 @@
 package main.java.gemocServer.metamodelElementWrapper;
 
+import org.eclipse.gemoc.trace.simple.RuntimeStep;
 import org.eclipse.gemoc.trace.simple.impl.RuntimeContainmentValueImpl;
 import org.eclipse.gemoc.trace.simple.impl.RuntimeStateImpl;
 import org.eclipse.gemoc.trace.simple.impl.RuntimeStepImpl;
@@ -9,7 +10,7 @@ import org.tetrabox.minijava.model.miniJava.semantics.impl.StateImpl;
 
 import main.java.gemocServer.wrapperVisitor.MetamodelElementWrapperVisitor;
 
-public class MetamodelElementWrapper {
+public abstract class MetamodelElementWrapper {
 	
 	protected RuntimeStepImpl runtimeStep;
 	
@@ -62,12 +63,12 @@ public class MetamodelElementWrapper {
 	public void setRuntimeStep(RuntimeStepImpl runtimeStep) {
 		this.runtimeStep = runtimeStep;
 	}
-
-
-	public String accept(MetamodelElementWrapperVisitor visitor) {
-		// TODO Auto-generated method stub
-		return visitor.visit(this);
+	public RuntimeStep getRuntimeStep() {
+		return this.runtimeStep;
 	}
+
+
+	public abstract String accept(MetamodelElementWrapperVisitor visitor);
 	
 	
 
