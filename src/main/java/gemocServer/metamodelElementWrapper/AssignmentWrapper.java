@@ -6,9 +6,9 @@ import org.tetrabox.minijava.model.miniJava.impl.VariableDeclarationImpl;
 
 import main.java.gemocServer.wrapperVisitor.MetamodelElementWrapperVisitor;
 
-public class AssignmentWrapper extends MetamodelElementWrapper {
+public class AssignmentWrapper extends MetamodelElementWrapper<AssignmentImpl> {
 	
-	private AssignmentImpl wrappedElement;
+	
 	
 	
 	public AssignmentWrapper(AssignmentImpl wrappedEl) {

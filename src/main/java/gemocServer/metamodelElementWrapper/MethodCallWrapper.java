@@ -13,15 +13,13 @@ import main.java.gemocServer.metamodelElementWrapper.receiver.VarReceiverWrapper
 import main.java.gemocServer.wrapperVisitor.MetamodelElementWrapperVisitor;
 
 
-public class MethodCallWrapper extends MetamodelElementWrapper{
+public class MethodCallWrapper extends MetamodelElementWrapper<MethodCallImpl>{
 
-	private MethodCallImpl wrappedMethodCall;
-	private RuntimeStateImpl runtimeState;
 	
 	public MethodCallWrapper(MethodCallImpl methodCall) {
-		wrappedMethodCall = methodCall;
-		runtimeState = null;
+		wrappedElement = methodCall;
 	}
+	
 	public MethodCallWrapper() {
 	
 	}
@@ -35,7 +33,7 @@ public class MethodCallWrapper extends MetamodelElementWrapper{
 		//RuntimeStateImpl subState = (RuntimeStateImpl) this.runtimeStep.getSubSteps().get(0).getSourceState();
 		//MethodCall2Impl mCall = (MethodCall2Impl)this.getChildFrameFromRootFrame(subState).getCall();
 		//return mCall.getMethodcall().getReceiver();
-		return this.wrappedMethodCall.getReceiver();
+		return this.wrappedElement.getReceiver();
 		
 	}
 	public MethodImpl getMethod() {
@@ -43,16 +41,13 @@ public class MethodCallWrapper extends MetamodelElementWrapper{
 		MethodImpl method = (MethodImpl) this.wrappedMethodCall.getMethod();
 		return method.getName();
 		**/
-		return (MethodImpl) this.wrappedMethodCall.getMethod();
+		return (MethodImpl) this.wrappedElement.getMethod();
 	}
 	
 	public EList<Expression> getArgs(){
-		return this.wrappedMethodCall.getArgs();
+		return this.wrappedElement.getArgs();
 	}
 	
-	public void setRuntimeStep(RuntimeStateImpl state) {
-		this.runtimeState = state;
-	}
 	
 	public AbstractReceiverWrapper getWrappedReceiver() {
 		String n = this.getReceiver().getClass().getSimpleName();
@@ -65,7 +60,7 @@ public class MethodCallWrapper extends MetamodelElementWrapper{
 	}
 	
 	public String getMethodName() {
-		return this.wrappedMethodCall.getMethod().getName();
+		return this.wrappedElement.getMethod().getName();
 	}
 	
 	public String getReceiverName() {

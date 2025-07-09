@@ -10,17 +10,20 @@ public class MetamodelElementWrapperVisitor {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String visit(MetamodelElementWrapper wrapper) {
+	public String visit(MetamodelElementWrapper<?> wrapper) {
 		return wrapper.accept(this);
 	}
 	
 	public String visit(MethodCallWrapper methodCall) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(String.format("{ \"receiver\" : \"%s\", ",methodCall.getReceiverName()));
-		builder.append(String.format(" \"method\" : \"%s\" } ",methodCall.getMethodName()));
+		builder.append(String.format(" \"method\" : \"%s\",",methodCall.getMethodName()));
+		builder.append(String.format(" \"stepNumber\" : \"%s\", ",methodCall.getRuntimeStep  ().getNumber()));
+		//builder.append(String.format(" \"elementType\" : \"%s\" } ",methodCall.getWrappedElement().eStaticClass());		
 		return builder.toString();
 	}
 	
+	//TODO
 	public String visit(AssignmentWrapper assignment) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(String.format("{ \"assigneeName\" : \"%s\", ",assignment.getAssignee().getName()));

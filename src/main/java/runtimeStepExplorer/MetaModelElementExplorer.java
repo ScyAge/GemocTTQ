@@ -1,18 +1,7 @@
 package main.java.runtimeStepExplorer;
 
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
 
@@ -25,11 +14,11 @@ public class MetaModelElementExplorer {
 		
 	}
 	
-	public MetamodelElementWrapper getWrapper(Object var) {
+	public MetamodelElementWrapper<?> getWrapper(Object var) {
 		if(var == null) {
 			return null;
 		}
-		MetamodelElementWrapper ne = visitor.doSwitch((EObject) var);
+		MetamodelElementWrapper<?> ne = visitor.doSwitch((EObject) var);
 		return ne;
 		
 		

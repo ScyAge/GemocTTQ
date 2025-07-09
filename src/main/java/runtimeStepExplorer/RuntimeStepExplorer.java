@@ -14,7 +14,7 @@ import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
 
 public class RuntimeStepExplorer {
 	
-	private final List<MetamodelElementWrapper> list = new ArrayList<>(); 
+	private final List<MetamodelElementWrapper<?>> list = new ArrayList<>(); 
 	private final MetaModelElementExplorer explorer;
 	
 	public RuntimeStepExplorer() {
@@ -29,7 +29,7 @@ public class RuntimeStepExplorer {
 	 */
 	public void explore(RuntimeStep aStep) {
 		
-		MetamodelElementWrapper wrapper = this.explorer.getWrapper(aStep.getSemanticRuleStaticTarget());
+		MetamodelElementWrapper<?> wrapper = this.explorer.getWrapper(aStep.getSemanticRuleStaticTarget());
 		if(wrapper != null) {
 			wrapper.setRuntimeStep((RuntimeStepImpl)aStep);
 			list.add(wrapper);
@@ -50,7 +50,7 @@ public class RuntimeStepExplorer {
 	
 	
 	
-	public List<MetamodelElementWrapper> getList(){
+	public List<MetamodelElementWrapper<?>> getList(){
 		return list;
 	}
 	

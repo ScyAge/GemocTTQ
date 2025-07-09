@@ -1,5 +1,6 @@
 package main.java.gemocServer.metamodelElementWrapper;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gemoc.trace.simple.RuntimeStep;
 import org.eclipse.gemoc.trace.simple.impl.RuntimeContainmentValueImpl;
 import org.eclipse.gemoc.trace.simple.impl.RuntimeStateImpl;
@@ -10,10 +11,10 @@ import org.tetrabox.minijava.model.miniJava.semantics.impl.StateImpl;
 
 import main.java.gemocServer.wrapperVisitor.MetamodelElementWrapperVisitor;
 
-public abstract class MetamodelElementWrapper {
+public abstract class MetamodelElementWrapper<T extends EObject> {
 	
 	protected RuntimeStepImpl runtimeStep;
-	
+	protected T wrappedElement;
 	
 	/**
 	 * This method crosses the hierarchy of a RuntimeStateImpl object to be able to retrieve the RootFrame.
@@ -70,6 +71,9 @@ public abstract class MetamodelElementWrapper {
 
 	public abstract String accept(MetamodelElementWrapperVisitor visitor);
 	
+	public T getWrappedElement() {
+		return wrappedElement;
+	}
 	
 
 }

@@ -36,7 +36,7 @@ public class TestTTQSelection {
 		RuntimeStepExplorer exp = new RuntimeStepExplorer();
 		MetamodelElementWrapperVisitor visitor = new MetamodelElementWrapperVisitor();
 		exp.explore(test);
-		List<MetamodelElementWrapper> res = exp.getList();
+		List<MetamodelElementWrapper<?>> res = exp.getList();
 		List<String> asen = res.stream().map(s -> visitor.visit(s)).toList();
 		System.out.print("sean");
 		

@@ -13,13 +13,13 @@ import main.java.gemocServer.metamodelElementWrapper.MethodCallWrapper;
 
 public class MiniJavaVisitor extends MiniJavaSwitch<MetamodelElementWrapper>{
 	
-	public MetamodelElementWrapper caseMethodCall(MethodCall methodCall) {
+	public MetamodelElementWrapper<?> caseMethodCall(MethodCall methodCall) {
 		MethodCallImpl mCall = (MethodCallImpl) methodCall;
 		return new MethodCallWrapper(mCall);
 		
 	}
 	
-	public MetamodelElementWrapper caseAssignment(Assignment object) {
+	public MetamodelElementWrapper<?> caseAssignment(Assignment object) {
 		AssignmentImpl assignment = (AssignmentImpl) object;
 		//return new AssignmentWrapper(assignment);
 		return null;
