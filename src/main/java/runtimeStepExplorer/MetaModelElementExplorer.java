@@ -1,50 +1,32 @@
 package main.java.runtimeStepExplorer;
 
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
 
-import main.java.gemocServer.metamodelElementWrapper.MetamodelElementAdapter;
+import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
 
 public class MetaModelElementExplorer {
 	
-	private Set<MetamodelElementAdapter> setElement;
+	private final MiniJavaVisitor visitor = new MiniJavaVisitor();
 	
 	
-	public MetaModelElementExplorer(Set<MetamodelElementAdapter> element) {
-		setElement = element;
+	public MetaModelElementExplorer() {
+		
 	}
 	
-	public Optional<MetamodelElementAdapter> getWrapper(Object var) {
+	public MetamodelElementWrapper<?> getWrapper(Object var) {
 		if(var == null) {
-			return Optional.empty();
+			return null;
 		}
-		Iterator<MetamodelElementAdapter> s = setElement.iterator();
-		Optional<MetamodelElementAdapter> found = Optional.empty();
-		while(s.hasNext() && !found.isPresent()) {
-			found = s.next().createAdapterIfInstanceOf(var);
-		}
-		if(found.isPresent()) {
-			return this.getSubWrapper(var, found.get());
-		}
-		return Optional.empty();
+		MetamodelElementWrapper<?> ne = visitor.doSwitch((EObject) var);
+		return ne;
 		
 		
 	}
-
-	private Optional<MetamodelElementAdapter> getSubWrapper(Object var, MetamodelElementAdapter wrapper) {
+	/**
+	private Optional<MetamodelElementAdapter> getSubWrapper(Object var, MetamodelElementWrapper wrapper) {
 		List<Object> test2 = this.getSubModelElement(var);
 		if(!test2.isEmpty()) {
-			Map<Class<? extends Object>, MetamodelElementAdapter> res = this.getWrappers(test2);
-			wrapper.addAllAttribute(res);
 			return Optional.of(wrapper);
 		}
 		return Optional.empty();
@@ -62,7 +44,7 @@ public class MetaModelElementExplorer {
 	}
 	
 	
-	public List<Object> getSubModelElement(EObject var){
+	public List<Object> getSubModelElement(Object var){
 		//var.eClass().getEAllStructuralFeatures();
 		//var.eGet();
 		//
@@ -83,10 +65,18 @@ public class MetaModelElementExplorer {
         return res;
 	}
 	
+	public List<Object> testMethod(EObject element){
+		List<Object> te = new ArrayList<>();
+		EList<EStructuralFeature> res = element.eClass().getEAllStructuralFeatures();
+		res.forEach(attr -> te.add(element.eGet(attr)));
+		return te;
+	}
+	
 	private boolean isGetter(Method method) {
 		//TODO: verify that the name of the method contain the name of one of the instance attribute.
 		return !method.isVarArgs() && (method.getReturnType() != void.class) && method.getName().startsWith("get");
 	}
+	**/
 	
 	
 }

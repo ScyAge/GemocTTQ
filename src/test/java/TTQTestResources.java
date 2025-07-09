@@ -33,12 +33,6 @@ public final class TTQTestResources {
 	
 	private static Resource miniJavaTraceResource() {
 		ResourceSet rs = new ResourceSetImpl();
-		//rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("simpletrace", new SimpleFactoryImpl());
-		//rs.getPackageRegistry().put(yourPackage.getNsURI(), yourPackage);
-		// Local path ?
-		
-		//URI uri = URI.createFileURI("src/tests/minijava-example.simpletrace");
-		//String path = Paths.get(".").toAbsolutePath().toString();
 		return rs.getResource(URI.createFileURI("src/test/java/minijava-example.simpletrace"), true);
 		
 	

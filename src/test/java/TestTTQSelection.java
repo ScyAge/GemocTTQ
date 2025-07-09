@@ -1,25 +1,19 @@
 package test.java;
 
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gemoc.trace.simple.RuntimeStep;
 import org.eclipse.gemoc.trace.simple.SimpleTrace;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.tetrabox.minijava.model.miniJava.MiniJavaPackage;
 
 import main.java.TTQSelectionFunctions;
-import main.java.gemocServer.metamodelElementWrapper.MetamodelElementAdapter;
+import main.java.gemocServer.metamodelElementWrapper.MetamodelElementWrapper;
+import main.java.gemocServer.wrapperVisitor.MetamodelElementWrapperVisitor;
 import main.java.runtimeStepExplorer.RuntimeStepExplorer;
 
 public class TestTTQSelection {
@@ -32,11 +26,19 @@ public class TestTTQSelection {
 		EList<RuntimeStep> test = TTQTestResources.miniJavaRootStepsExample();
 		SimpleTrace trace = TTQTestResources.miniJavaTraceExample();
 		TreeIterator<EObject> e = trace.eAllContents();
+		
+		//MetaModelElementExplorer n = new MetaModelElementExplorer();
+		//List<Object> a = n.testMethod(methodCallStep.getSemanticRuleStaticTarget());
+		
+		//List<Object> b = n.testMethod((EObject)a.get(1));
+		
 		//Assertions.assertTrue(TTQSelectionFunctions.isKindOf(methodCallClass, methodCallStep));
-		Set<MetamodelElementAdapter> car = this.test();
-		RuntimeStepExplorer exp = new RuntimeStepExplorer(car);
-		exp.explore(methodCallStep);
-		List<MetamodelElementAdapter> res = exp.getList();
+		RuntimeStepExplorer exp = new RuntimeStepExplorer();
+		MetamodelElementWrapperVisitor visitor = new MetamodelElementWrapperVisitor();
+		exp.explore(test);
+		List<MetamodelElementWrapper<?>> res = exp.getList();
+		List<String> asen = res.stream().map(s -> visitor.visit(s)).toList();
+		System.out.print("sean");
 		
 	}
 	
@@ -48,100 +50,7 @@ public class TestTTQSelection {
 		//Assertions.assertTrue(selection.stream().allMatch(step -> step.getSemanticRuleStaticTarget().eClass() == MiniJavaPackage.eINSTANCE.getMethodCall()));	
 	}
 	
-	private Set<MetamodelElementAdapter> test(){
-		Set<MetamodelElementAdapter> res = new HashSet<>();
-		List<String> wrappers = Arrays.asList(
-				"AndImplAdapter",
-			    "ArrayAccessImplAdapter",
-			    "ArrayLengthImplAdapter",
-			    "ArrayTypeRefImplAdapter",
-			    "AssigneeImplAdapter",
-			    "AssignmentImplAdapter",
-			    "BlockImplAdapter",
-			    "BoolConstantImplAdapter",
-			    "BooleanTypeRefImplAdapter",
-			    "ClassImplAdapter",
-			    "ClassRefImplAdapter",
-			    "DivisionImplAdapter",
-			    "EqualityImplAdapter",
-			    "ExpressionImplAdapter",
-			    "FieldAccessImplAdapter",
-			    "FieldImplAdapter",
-			    "ForStatementImplAdapter",
-			    "IfStatementImplAdapter",
-			    "ImportImplAdapter",
-			    "InferiorImplAdapter",
-			    "InferiorOrEqualImplAdapter",
-			    "InequalityImplAdapter",
-			    "IntConstantImplAdapter",
-			    "IntegerTypeRefImplAdapter",
-			    "InterfaceImplAdapter",
-			    "MemberImplAdapter",
-			    "MethodCallImplAdapter",
-			    "MethodImplAdapter",
-			    "MinusImplAdapter",
-			    "MultiplicationImplAdapter",
-			    "NamedElementImplAdapter",
-			    "NegImplAdapter",
-			    "NewArrayImplAdapter",
-			    "NewObjectImplAdapter",
-			    "NotImplAdapter",
-			    "NullImplAdapter",
-			    "OrImplAdapter",
-			    "ParameterImplAdapter",
-			    "PlusImplAdapter",
-			    "PrintStatementImplAdapter",
-			    "ProgramImplAdapter",
-			    "ReturnImplAdapter",
-			    "SingleTypeRefImplAdapter",
-			    "StatementImplAdapter",
-			    "StringConstantImplAdapter",
-			    "StringTypeRefImplAdapter",
-			    "SuperImplAdapter",
-			    "SuperiorImplAdapter",
-			    "SuperiorOrEqualImplAdapter",
-			    "SymbolImplAdapter",
-			    "SymbolRefImplAdapter",
-			    "ThisImplAdapter",
-			    "TypeDeclarationImplAdapter",
-			    "TypeRefImplAdapter",
-			    "TypedDeclarationImplAdapter",
-			    "VariableDeclarationImplAdapter",
-			    "VoidTypeRefImplAdapter",
-			    "WhileStatementImplAdapter"
-			);
-		
-		 for (String nomClasse : wrappers) {
-	            Class<?> clazz;
-				try {
-					clazz = Class.forName("main.java.gemocServer.metamodelElementWrapper.generatedAdapter.".concat(nomClasse));
-					MetamodelElementAdapter instance = (MetamodelElementAdapter) clazz.getDeclaredConstructor().newInstance();
-		            res.add(instance);
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	            
-	        }
-		 return res;
+	
 		 
-	}
+	
 }
