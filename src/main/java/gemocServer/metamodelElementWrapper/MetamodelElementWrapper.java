@@ -16,6 +16,10 @@ public abstract class MetamodelElementWrapper<T extends EObject> {
 	protected RuntimeStepImpl runtimeStep;
 	protected T wrappedElement;
 	
+	public MetamodelElementWrapper(T elementToWrap) {
+		wrappedElement = elementToWrap;
+	}
+	
 	/**
 	 * This method crosses the hierarchy of a RuntimeStateImpl object to be able to retrieve the RootFrame.
 	 * @param runtimeState

@@ -12,7 +12,7 @@ public class AssignmentWrapper extends MetamodelElementWrapper<AssignmentImpl> {
 	
 	
 	public AssignmentWrapper(AssignmentImpl wrappedEl) {
-		this.wrappedElement = wrappedEl;
+		super(wrappedEl);
 	}
 	
 	public VariableDeclarationImpl getAssignee() {

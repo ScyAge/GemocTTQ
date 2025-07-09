@@ -17,12 +17,10 @@ public class MethodCallWrapper extends MetamodelElementWrapper<MethodCallImpl>{
 
 	
 	public MethodCallWrapper(MethodCallImpl methodCall) {
-		wrappedElement = methodCall;
+		super(methodCall);
 	}
 	
-	public MethodCallWrapper() {
 	
-	}
 	
 	public Expression getReceiver() {
 		/**
