@@ -34,9 +34,9 @@ public final class TTQTestResources {
 	private static Resource miniJavaTraceResource() {
 		ResourceSet rs = new ResourceSetImpl();
 		return rs.getResource(URI.createFileURI("src/test/java/minijava-example.simpletrace"), true);
-		
-	
 	}
+	
+	
 	
 	public static RuntimeStep miniJavaMethodCallStepExample() {
 		return TTQTestResources.miniJavaRootStepsExample().get(1).getSubSteps().get(9);
@@ -49,5 +49,29 @@ public final class TTQTestResources {
 	public static EList<RuntimeStep> miniJavaRootStepsSubstepsExample() {
 		return TTQTestResources.miniJavaTraceExample().getRootSteps().get(1).getSubSteps();		
 	}
+	
+	
+	private static Resource miniJavaTraceResource(String path) {
+		ResourceSet rs = new ResourceSetImpl();
+		return rs.getResource(URI.createFileURI(path), true);
+	}
+	
+	public static SimpleTrace miniJavaTraceExample(String path) {
+		if (trace == null) {
+			Resource r = TTQTestResources.miniJavaTraceResource(path);
+			EcoreUtil.resolveAll(r.getResourceSet());
+			trace = (SimpleTrace) r.getContents().get(0);
+			//trace.eAllContents() chaque object de la trace
+			
+			
+		}
+		return trace;
+	}
+	
+	public static EList<RuntimeStep> miniJavaRootStepsExample(String path) {
+		return TTQTestResources.miniJavaTraceExample(path).getRootSteps();		
+	}
+	
+	
 	
 }
