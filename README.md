@@ -1,63 +1,70 @@
-Ce projet va de pair avec https://github.com/ScyAge/GEMOC-TTQ. Cette partie concerne principalement l'analyse de trace d'exécution minijava afin de pouvoir réaliser des TTQs dans Pharo.
+This project goes hand in hand with https://github.com/ScyAge/GEMOC-TTQ. This part mainly concerns the analysis of minijava execution traces in order to be able to perform TTQs in Pharo.
 
 
 
-## But
+## Purpose
 
-Le but de ce projet est d'analyser une trace de manière générique pour n'importe quelle DSL.
+The goal of this project is to analyze a trace in a generic way for any DSL.
 
-Pour cela on met en place plusieurs outils, qui permettent d'analyser une trace : 
-- Dans un premier temps, on analyse la trace et on place dans des wrappers chaque élément sur lequel le designer voudrait pouvoir exécuter une TTQ. 
-- Ensuite, les wrappers nous permettent, via les informations qu'ils contiennent et un patron de conception visiteur, de créer un fichier JSON.
-- Ce fichier json peut ensuite être envoyé via un serveur en Pharo. Les informations que le fichier contient nous permettent dans Pharo de créer des fonctions de sélection pour les TTQ.
-
-## Avancement
-
-Pour le moment pour simplifier on s'interesesse uniquement aux éléments statique présent dans la trace et au appel de méthod.On veut pouvoir  testé si la création d'une fonction de selection et possible dans un cas plus simple. L'experience est concluante.
-
-### Partie analyse de Trace:
-
-Cette partie contient trois élement imporant, les wrappers, le runtimestep explorer et le visiteur.
-
-Runtimestep explorer: est une classe qui peut prendre un RuntimeStep ou list de RuntimeStep et qui va récursivement tous les expolerer. Sur chacun des ces step il va utiliser le visteur afin de testé si un wrapper d'élement du métomodel  existe. Si oui il l'instancie et l'ajoute dans une liste
-
-Visiteur : Tous les dsl pour gemoc doivent definir un visiteur avec un switch qui permet de visiter chacun des élements du metamodel, dans cette classe il y une method par élement du model qui sera executer par le switch. Dans notre cas on redefinis le code de certaine des ces méthodes dans une sous classe, afin de pouvoir instancier nos wrappers
-
-Wrapper : les wrapper contienne deux information principal, l'élement du model qui a été  envelopper et son RuntimeStep d'origine, c'est deux informations nous permettent de pouvoir récupérer aussi bien les information statique que Runtime dans le wrapper et de définir comment les récuperes dans des méthodes.
-
-### Partie Server:
-
-La partie précédente est reliée avec un serveur Java avec l'API Javalin. Ce serveur est le point d'entrée pour utiliser ce projet, il offre la possibilité de questionner des routes qui permettent :
-
-- `/fetchAllAvailableTrace` de récupérer le nom de toute les trace présente dans le dossier traceContainer du server
-- `/postTraceName` permet de chargé une trace présente dans le dossier du server afin qu'elle soit analyser
--  `/getParsedTrace` permet de récuper le JSON de la trace choisis qui à été analyser
+For this, we are setting up several tools, which allow analyzing a trace: 
+- First, we analyze the trace and place in wrappers each element on which the designer would like to be able to execute a TTQ. 
+- Then, the wrappers allow us, via the information they contain and a visitor design pattern, to create a JSON file.
+- This json file can then be sent via a server in Pharo. The information that the file contains allows us in Pharo to create selection functions for the TTQ.
 
 
+## Progress
+
+For the moment, to simplify, we are interested only in the static elements present in the trace and in the method call. We want to be able to test if the creation of a selection function is possible in a simpler case. The experience is conclusive.
+
+### Part analysis of Trace:
+
+This part contains three important elements, the wrappers, the runtimestep explorer, and the visitor.
+
+Runtimestep explorer: is a class that can take a RuntimeStep or list of RuntimeStep and that will recursively remove all them. On each of these steps, he will use the vistor to test if an element wrapper of the metomodel exists. If yes, he instantiates it and adds it to a list
+
+Visitor: All dsl for gemoc must define a visitor with a switch that allows visiting each of the elements of the metamodel, in this class there is a method by element of the model that will be executed by the switch. In our case, we redefined the code of some of these methods in a subclass, in order to instantiate our wrappers
+
+Wrapper: the wrappers contain two main information, the element of the model that was wrapped and its original RuntimeStep, it is two pieces of information that allow us to retrieve both static and Runtime information in the wrapper and define how the retrieved in methods.
 
 
-## Travail futur
+### Part Server:
 
-### Partie analyse de Trace:
+The previous part is linked with a Java server with the Javalin API. This server is the entry point to use this project, it offers the possibility to question routes that allow:
 
-On voudrait pouvoir avoir les informations runtime dans nos wrapper afin de créer des TTQs plus précises. Faire des tests sur des cas plus grands et pas seulement sur les méthodCall.
+- `/fetchAllAvailableTrace` to retrieve the name of all the traces present in the traceContainer folder of the server
+- `/postTraceName` allows to load a trace present in the server folder so that it can be analyzed
+-  `/getParsedTrace` allows retrieving the JSON of the chosen trace that has been analyzed
 
-### Partie Server:
 
-Pour le moment, la route `/getParsedTrace` renvoie une trace générique qui a été analysée et ne fonctionne pas en fonction des routes précédentes. On voudrais pouvoir le faire fonctionner exactement comme décrit précédemment ? 
+
+
+
+## Future work
+
+### Part analysis of Trace:
+
+We would like to have the runtime information in our wrapper in order to create more precise TTQs. Conduct tests on larger cases and not only on the method call.
+
+### Part Server:
+
+For the moment, route `/getParsedTrace` returns a generic trace that has been analyzed and does not work based on previous routes. We would like to be able to operate it exactly as described previously
+
 
 
 ## Desinger and User part
 
 ### Desinger : 
-Dans ce projet, certaines parties doivent être réalisées par le designer du DSL qui veut adapter les TTQs pour son langage.
+In this project, some parts must be coded by the designer of the DSL who wants to adapt the TTQs for his language.
 
-Grâce à Pharo, on souhaiterait pouvoir générer des templates pour les wrappers, car c'est le designer qui connaît bien son langage et donc c'est lui qui doit spécifier comment récupérer chacune des informations afin de faire des TTQ pertinentes.
-Ça serait à lui aussi de sous-classer le visiteur des éléments de son langage. Il pourra donc choisir quel élément il voudra wrapper et lequel ne l'intéresse pas.
+- the different wrapper
+- the extension of the switch on the elements of its AST
 
-### User : 
+There is one last case where the question arises as to whether it is the designer who must write the visitor pattern for serialization in JSON or it is he who must adapt when writing wrappers in order to match the API present in the serialization tool. This question is important because in the case of option 1, it will imply that the designer will have to apply strict rules in order to match the format of the JSON to the one expected by the TTQs in Pharo, under the risk of having to write in addition new Pharo adapters to match the format. Under option 2, a solution would be to provide methods to be completed (Template) that would indicate directly to the designer what he will need to write.
 
-Dans le cas de l'utilisateur, il devrait juste avoir à installer le serveur qui existe pour son Dsl sur son projet et générer des traces dans le dossier traceContainer. Le reste de ces actions seront effectuées dans Pharo
+
+### User: 
+
+In the case of the user, he should just have to install the server that has been created by a designer on his project and generate traces in the traceContainer folder. The rest of these actions will be performed in Pharo
 
 
 
