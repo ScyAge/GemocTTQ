@@ -67,5 +67,11 @@ There is one last case where the question arises as to whether it is the designe
 In the case of the user, he should just have to install the server that has been created by a designer on his project and generate traces in the traceContainer folder. The rest of these actions will be performed in Pharo
 
 
+## schema
+
+<img width="2511" height="1301" alt="diagrameTTQPharoGemoc drawio" src="https://github.com/user-attachments/assets/2e59c4a4-c927-43a3-9235-d9294c388d21" />
+
+
+
 
 
