@@ -69,7 +69,8 @@ In the case of the user, he should just have to install the server that has been
 
 ## schema
 
-<img width="2511" height="1301" alt="diagrameTTQPharoGemoc drawio" src="https://github.com/user-attachments/assets/2e59c4a4-c927-43a3-9235-d9294c388d21" />
+<img width="2511" height="1301" alt="diagrameTTQPharoGemoc drawio (1)" src="https://github.com/user-attachments/assets/8b92545a-9dd4-4e37-933b-eedc782c6546" />
+
 
 
 
@@ -84,8 +85,38 @@ In the case of the user, he should just have to install the server that has been
 
 GEMOC
 
+Firstly, you need to get these libraries:
+
+annotations-13.0.jar                
+error_prone_annotations-2.38.0.jar  
+gson-2.13.1.jar                   
+javalin-6.6.0.jar                    
+jetty-http-11.0.25.jar              
+jetty-io-11.0.25.jar               
+jetty-jakarta-servlet-api-5.0.2.jar  
+jetty-security-11.0.25.jar         
+jetty-server-11.0.25.jar           
+jetty-servlet-11.0.25.jar           
+jetty-util-11.0.25.jar           
+jetty-webapp-11.0.25.jar             
+jetty-xml-11.0.25.jar               
+kotlin-stdlib-1.9.25.jar           
+kotlin-stdlib-jdk7-1.9.25.jar       
+kotlin-stdlib-jdk8-1.9.25.jar         
+slf4j-api-2.0.17.jar               
+slf4j-simple-2.0.16.jar               
+websocket-core-common-11.0.25.jar    
+websocket-core-server-11.0.25.jar     
+websocket-jetty-api-11.0.25.jar       
+websocket-jetty-common-11.0.25.jar    
+websocket-jetty-server-11.0.25.jar  
+websocket-servlet-11.0.25.jar        
+
+
+
+- put all these exact dependencies in a libs package at the project root
 - verify the dependencies in the classpath of the simpletrace and minijava modules
-- check the precency of libraries for the server in the project’s METAINF (runtime/classpath tab) and in the Java buildpath (libraries/classpath tab)
+- check if the dependencies of libraries for the server are in the project’s METAINF (runtime/classpath) and in the Java buildpath (libraries/classpath)
 - launch the server in the test folder, With the LaunchServerTest class
 
 Pharo 
@@ -111,6 +142,15 @@ loader open.
 - we can then fetch all trace (give fake files for the moment)
 - we choose a track then we do setTrace
 - then getTrace 
-- an inspector should open on  the list of steps that we retrieved from the server 
+- an inspector should open on  the list of steps that we retrieved from the server
+- you can now make a selection fonction by making this code in the inspector
 
+```st
+| selection test |
 
+test := self collect: [ :a | MethodCallAdapteurToPharo createAdapterWithDictionary: a ].
+
+selection := SkSelectionMessagesSentWithSelector new.
+selection selector: #bubbleSort.
+test select: [ :ps | selection value: ps].
+```
