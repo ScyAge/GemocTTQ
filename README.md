@@ -45,6 +45,8 @@ The previous part is linked with a Java server with the Javalin API. This server
 
 We would like to have the runtime information in our wrapper in order to create more precise TTQs. Conduct tests on larger cases and not only on the method call.
 
+We can find the references of the objects at the base of the trace that we retrieve, in the runtimeOnlyElements attribute. Each of the elements in this list represent a runtime object present in the trace, and each of them has a version attribute that allows to see all the versions of an object when an action was done on it during execution.
+
 ### Part Server:
 
 For the moment, route `/getParsedTrace` returns a generic trace that has been analyzed and does not work based on previous routes. We would like to be able to operate it exactly as described previously
